@@ -11,67 +11,263 @@
       background: #0f172a;
       color: #f1f5f9;
       min-height: 100vh;
-      padding: 2rem;
+      padding: 1.5rem;
     }
-    .container { max-width: 900px; margin: 0 auto; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* Header */
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
     h1 { font-size: 1.5rem; font-weight: 700; }
     .subtitle { color: #94a3b8; font-size: 0.875rem; margin-top: 0.25rem; }
     .tag { background: #6366f1; color: white; font-size: 0.75rem; padding: 0.25rem 0.625rem; border-radius: 4px; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
-    .stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1rem; }
-    .stat-value { font-size: 1.75rem; font-weight: 700; color: #6366f1; }
-    .stat-label { font-size: 0.8125rem; color: #94a3b8; margin-top: 0.25rem; }
-    .section { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .section-title { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
-    .empty { color: #94a3b8; font-size: 0.875rem; text-align: center; padding: 2rem; }
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.5rem 0.75rem; border-bottom: 1px solid #334155; }
-    td { font-size: 0.875rem; padding: 0.75rem; border-bottom: 1px solid #1e293b; }
+
+    /* Privacy notice */
+    .privacy-note {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8125rem; color: #94a3b8;
+      padding: 0.75rem 1rem;
+      background: #0f172a; border: 1px solid #334155;
+      border-radius: 8px; margin-bottom: 1.5rem;
+    }
+    .privacy-icon { color: #22c55e; }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-card {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 10px; padding: 0.875rem;
+    }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: #6366f1; }
+    .stat-label { font-size: 0.75rem; color: #94a3b8; margin-top: 0.2rem; }
+    .stat-value.warning { color: #f59e0b; }
+    .stat-value.danger { color: #ef4444; }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .filter-bar label { font-size: 0.8125rem; color: #94a3b8; }
+    .filter-bar input[type="date"] {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 6px; color: #f1f5f9;
+      padding: 0.375rem 0.625rem; font-size: 0.8125rem;
+    }
+    .filter-bar input:focus { outline: none; border-color: #6366f1; }
+    .filter-bar select {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 6px; color: #f1f5f9;
+      padding: 0.375rem 0.625rem; font-size: 0.8125rem;
+    }
+    .filter-bar select:focus { outline: none; border-color: #6366f1; }
+    .filter-bar button {
+      padding: 0.375rem 0.75rem; border: 1px solid #334155;
+      border-radius: 6px; background: transparent; color: #94a3b8;
+      font-size: 0.8125rem; cursor: pointer;
+    }
+    .filter-bar button:hover { border-color: #6366f1; color: #f1f5f9; }
+    .filter-bar button.active { background: #6366f1; border-color: #6366f1; color: white; }
+
+    /* Sections */
+    .section {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem;
+    }
+    .section-title { font-size: 0.9375rem; font-weight: 600; margin-bottom: 1rem; }
+
+    /* Activity chart */
+    .activity-chart { display: flex; align-items: flex-end; gap: 4px; height: 60px; }
+    .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .bar { width: 100%; background: #6366f1; border-radius: 3px 3px 0 0; min-height: 2px; transition: height 0.3s; }
+    .bar-label { font-size: 0.625rem; color: #64748b; }
+
+    /* Sessions table */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 700px; }
+    th {
+      text-align: left; font-size: 0.6875rem; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 0.5rem 0.75rem; border-bottom: 1px solid #334155;
+      white-space: nowrap;
+    }
+    td { font-size: 0.8125rem; padding: 0.75rem 0.75rem; border-bottom: 1px solid #1e293b; }
     tr:last-child td { border-bottom: none; }
-    .intent-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; background: #334155; color: #94a3b8; }
-    .btn { padding: 0.5rem 1rem; border: 1px solid #334155; border-radius: 6px; background: transparent; color: #94a3b8; font-size: 0.8125rem; cursor: pointer; transition: all 0.2s; }
+    tr.clickable { cursor: pointer; }
+    tr.clickable:hover { background: #1e293b; }
+    tr.expanded td { background: #1e293b; border-bottom: none; }
+
+    .intent-bar-cell { min-width: 120px; }
+    .intent-bar-wrap { display: flex; gap: 2px; height: 20px; border-radius: 4px; overflow: hidden; }
+    .intent-bar-segment { height: 100%; border-radius: 2px; }
+    .intent-bar-segment.debugging { background: #ef4444; }
+    .intent-bar-segment.explaining { background: #6366f1; }
+    .intent-bar-segment.brainstorming { background: #22c55e; }
+    .intent-bar-segment.summarizing { background: #f59e0b; }
+    .intent-bar-segment.other { background: #475569; }
+
+    .intent-counts { font-size: 0.6875rem; color: #64748b; margin-top: 3px; }
+
+    /* Flags */
+    .flag {
+      display: inline-block; font-size: 0.6875rem;
+      padding: 0.125rem 0.375rem; border-radius: 3px; margin: 1px;
+    }
+    .flag.low { background: #fef3c7; color: #92400e; }
+    .flag.high-debug { background: #fee2e2; color: #991b1b; }
+    .flag.trend-down { background: #e0e7ff; color: #3730a3; }
+    .flag.no-reflection { background: #f1f5f9; color: #475569; }
+
+    .expand-arrow { color: #64748b; transition: transform 0.2s; font-size: 0.75rem; }
+    tr.expanded .expand-arrow { transform: rotate(90deg); }
+
+    /* Detail panel */
+    .detail-panel {
+      display: none;
+      background: #0f172a; border: 1px solid #334155;
+      border-radius: 8px; padding: 1rem; margin-top: 0.5rem;
+    }
+    .detail-panel.open { display: block; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .detail-block h4 { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .detail-block p, .detail-block pre { font-size: 0.8125rem; color: #cbd5e1; }
+    .detail-block pre { white-space: pre-wrap; word-break: break-word; background: #1e293b; border-radius: 6px; padding: 0.75rem; }
+    .exchange-timeline { display: flex; flex-direction: column; gap: 0.375rem; }
+    .exchange-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: #1e293b; border-radius: 6px; padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+    }
+    .exchange-item .num { color: #475569; font-size: 0.6875rem; min-width: 20px; }
+    .exchange-item .intent-tag {
+      padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.6875rem;
+    }
+    .exchange-item .intent-tag.debugging { background: #fef2f2; color: #991b1b; }
+    .exchange-item .intent-tag.explaining { background: #eef2ff; color: #3730a3; }
+    .exchange-item .intent-tag.brainstorming { background: #f0fdf4; color: #166534; }
+    .exchange-item .intent-tag.summarizing { background: #fffbeb; color: #92400e; }
+    .exchange-item .intent-tag.other { background: #f1f5f9; color: #475569; }
+    .exchange-item .meta { color: #64748b; font-size: 0.6875rem; }
+
+    /* Buttons */
+    .btn {
+      padding: 0.5rem 1rem; border: 1px solid #334155; border-radius: 6px;
+      background: transparent; color: #94a3b8; font-size: 0.8125rem;
+      cursor: pointer; transition: all 0.15s;
+    }
     .btn:hover { border-color: #6366f1; color: #f1f5f9; }
     .btn-primary { background: #6366f1; border-color: #6366f1; color: white; }
-    .btn-primary:hover { background: #818cf8; }
-    .privacy-note { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: #94a3b8; padding: 0.75rem 1rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; margin-bottom: 1.5rem; }
-    .privacy-icon { color: #22c55e; }
-    @media (max-width: 600px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .btn-primary:hover { background: #4f46e5; }
+    .btn-sm { padding: 0.25rem 0.625rem; font-size: 0.75rem; }
+
+    .empty { color: #94a3b8; font-size: 0.875rem; text-align: center; padding: 2rem; }
+    .day-label { font-size: 0.75rem; }
+
+    @media (max-width: 700px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .detail-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
+
+    <!-- Header -->
     <div class="header">
       <div>
         <h1>corrAL-edu</h1>
         <p class="subtitle">AI Process Tracker — Teacher Dashboard</p>
       </div>
-      <span class="tag">Pilot v1.0</span>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span class="tag">Pilot v1.0</span>
+        <button class="btn btn-sm" id="refreshData">↻ Refresh</button>
+        <button class="btn btn-primary btn-sm" id="exportCSV">↓ Export CSV</button>
+      </div>
     </div>
 
+    <!-- Privacy notice -->
     <div class="privacy-note">
       <span class="privacy-icon">✓</span>
       <span>All data is stored locally. No prompt text, responses, or student identifiers are captured — metrics only.</span>
     </div>
 
+    <!-- Stats cards -->
     <div class="stats-grid" id="statsGrid">
-      <div class="stat-card"><div class="stat-value" id="totalSessions">—</div><div class="stat-label">Total Sessions</div></div>
-      <div class="stat-card"><div class="stat-value" id="avgExchanges">—</div><div class="stat-label">Avg Exchanges/Session</div></div>
-      <div class="stat-card"><div class="stat-value" id="reflectionRate">—</div><div class="stat-label">Reflection Rate</div></div>
-      <div class="stat-card"><div class="stat-value" id="storageUsed">—</div><div class="stat-label">Storage Used</div></div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Sessions (last 14 days)</div>
-      <div id="sessionsTable">
-        <div class="empty">Loading session data...</div>
+      <div class="stat-card">
+        <div class="stat-value" id="totalSessions">—</div>
+        <div class="stat-label">Total Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="avgExchanges">—</div>
+        <div class="stat-label">Avg Exchanges/Session</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="reflectionRate">—</div>
+        <div class="stat-label">Reflection Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="engagementRate">—</div>
+        <div class="stat-label">High-Engagement</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="storageUsed">—</div>
+        <div class="stat-label">Storage Used</div>
       </div>
     </div>
 
-    <div style="display:flex;gap:0.75rem;margin-top:1rem;">
-      <button class="btn btn-primary" id="exportCSV">Export CSV</button>
-      <button class="btn" id="refreshData">Refresh</button>
+    <!-- 7-day activity chart -->
+    <div class="section">
+      <div class="section-title">Activity — Last 7 Days</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:4px;">
+        <div class="activity-chart" id="activityChart"></div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:0 0.5rem;">
+          <span style="font-size:0.6875rem;color:#64748b;">Intent mix:</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:0.6875rem;color:#94a3b8;"><span style="width:10px;height:10px;border-radius:2px;background:#ef4444;display:inline-block;"></span>debugging</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:0.6875rem;color:#94a3b8;"><span style="width:10px;height:10px;border-radius:2px;background:#6366f1;display:inline-block;"></span>explaining</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:0.6875rem;color:#94a3b8;"><span style="width:10px;height:10px;border-radius:2px;background:#22c55e;display:inline-block;"></span>brainstorming</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:0.6875rem;color:#94a3b8;"><span style="width:10px;height:10px;border-radius:2px;background:#f59e0b;display:inline-block;"></span>summarizing</span>
+        </div>
+      </div>
     </div>
+
+    <!-- Filters -->
+    <div class="filter-bar">
+      <label>From</label>
+      <input type="date" id="filterFrom">
+      <label>To</label>
+      <input type="date" id="filterTo">
+      <button class="filter-btn" data-range="7">7 days</button>
+      <button class="filter-btn" data-range="14">14 days</button>
+      <button class="filter-btn active" data-range="30">30 days</button>
+      <button class="filter-btn" data-range="all">All</button>
+      <span style="margin-left:auto;font-size:0.75rem;color:#64748b;" id="filterCount"></span>
+    </div>
+
+    <!-- Sessions table -->
+    <div class="section">
+      <div class="section-title">Sessions</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Date</th>
+              <th>Site</th>
+              <th>Exchanges</th>
+              <th>Intent Breakdown</th>
+              <th>Flags</th>
+              <th>Reflection</th>
+            </tr>
+          </thead>
+          <tbody id="sessionsTableBody">
+            <tr><td colspan="7" class="empty">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 
   <script src="dashboard.js"></script>
