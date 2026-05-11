@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>corrAL-edu — Session Status</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 280px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #f1f5f9;
+      padding: 1rem;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+    .dot.inactive { background: #475569; }
+    .title { font-size: 0.875rem; font-weight: 600; }
+    .session-info {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .metric { display: flex; justify-content: space-between; font-size: 0.8125rem; margin-bottom: 0.25rem; }
+    .metric:last-child { margin-bottom: 0; }
+    .metric-label { color: #94a3b8; }
+    .metric-value { color: #f1f5f9; font-weight: 500; }
+    .divider { height: 1px; background: #334155; margin: 0.75rem 0; }
+    .footer { font-size: 0.75rem; color: #94a3b8; text-align: center; }
+    .warning { color: #eab308; }
+    .settings-btn {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .settings-btn:hover { border-color: #6366f1; color: #f1f5f9; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="dot inactive" id="statusDot"></div>
+    <span class="title">corrAL-edu</span>
+  </div>
+
+  <div class="session-info" id="sessionInfo">
+    <div class="metric">
+      <span class="metric-label">Site</span>
+      <span class="metric-value" id="siteValue">—</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">Exchanges</span>
+      <span class="metric-value" id="exchangeCount">0</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">Last intent</span>
+      <span class="metric-value" id="lastIntent">—</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <button class="settings-btn" id="openDashboard">Open Teacher Dashboard</button>
+  <button class="settings-btn" id="clearData">Clear All Data</button>
+
+  <div class="footer">corrAL-edu v1.0 — Local storage only</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>corrAL-edu — Teacher Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #f1f5f9;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    h1 { font-size: 1.5rem; font-weight: 700; }
+    .subtitle { color: #94a3b8; font-size: 0.875rem; margin-top: 0.25rem; }
+    .tag { background: #6366f1; color: white; font-size: 0.75rem; padding: 0.25rem 0.625rem; border-radius: 4px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1rem; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; color: #6366f1; }
+    .stat-label { font-size: 0.8125rem; color: #94a3b8; margin-top: 0.25rem; }
+    .section { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .section-title { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+    .empty { color: #94a3b8; font-size: 0.875rem; text-align: center; padding: 2rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.5rem 0.75rem; border-bottom: 1px solid #334155; }
+    td { font-size: 0.875rem; padding: 0.75rem; border-bottom: 1px solid #1e293b; }
+    tr:last-child td { border-bottom: none; }
+    .intent-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; background: #334155; color: #94a3b8; }
+    .btn { padding: 0.5rem 1rem; border: 1px solid #334155; border-radius: 6px; background: transparent; color: #94a3b8; font-size: 0.8125rem; cursor: pointer; transition: all 0.2s; }
+    .btn:hover { border-color: #6366f1; color: #f1f5f9; }
+    .btn-primary { background: #6366f1; border-color: #6366f1; color: white; }
+    .btn-primary:hover { background: #818cf8; }
+    .privacy-note { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: #94a3b8; padding: 0.75rem 1rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; margin-bottom: 1.5rem; }
+    .privacy-icon { color: #22c55e; }
+    @media (max-width: 600px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>corrAL-edu</h1>
+        <p class="subtitle">AI Process Tracker — Teacher Dashboard</p>
+      </div>
+      <span class="tag">Pilot v1.0</span>
+    </div>
+
+    <div class="privacy-note">
+      <span class="privacy-icon">✓</span>
+      <span>All data is stored locally. No prompt text, responses, or student identifiers are captured — metrics only.</span>
+    </div>
+
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="stat-value" id="totalSessions">—</div><div class="stat-label">Total Sessions</div></div>
+      <div class="stat-card"><div class="stat-value" id="avgExchanges">—</div><div class="stat-label">Avg Exchanges/Session</div></div>
+      <div class="stat-card"><div class="stat-value" id="reflectionRate">—</div><div class="stat-label">Reflection Rate</div></div>
+      <div class="stat-card"><div class="stat-value" id="storageUsed">—</div><div class="stat-label">Storage Used</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Sessions (last 14 days)</div>
+      <div id="sessionsTable">
+        <div class="empty">Loading session data...</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+      <button class="btn btn-primary" id="exportCSV">Export CSV</button>
+      <button class="btn" id="refreshData">Refresh</button>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
