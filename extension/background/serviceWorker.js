@@ -1,11 +1,14 @@
 /**
  * corrAL-edu Background Service Worker (Manifest V3)
  * Handles messaging between content scripts and storage.
- * Also manages session lifecycle across tab changes.
+ * Manages session lifecycle across tab changes and service worker restarts.
  */
 
 import { getSessions, upsertSession, getSession, clearAllSessions, getStorageStats } from '../utils/storage.js';
-import { startSession, endSession, getCurrentSession, restoreSession } from '../utils/sessionManager.js';
+import { startSession, endSession, getCurrentSession, restoreSession, recordExchange, recordReflection } from '../utils/sessionManager.js';
+
+// currentSession is held in sessionManager module — we reference it via getCurrentSession()
+// Service worker may restart at any time, so we restore from storage on EXCHANGE_RECORDED
 
 // ── Message Handlers ──────────────────────────────────────────
 
@@ -24,15 +27,23 @@ async function handleMessage(message, sender) {
 
     case 'EXCHANGE_RECORDED': {
       const { intent, promptLength, wordCount } = message;
-      // Record via sessionManager's recordExchange
-      const { recordExchange } = await import('../utils/sessionManager.js');
+      // Ensure we have an active session — restore from storage or create new one
+      let session = getCurrentSession();
+      if (!session) {
+        const allSessions = await getSessions();
+        const active = allSessions.find(s => !s.endTime);
+        if (active) {
+          session = await restoreSession(active.sessionId);
+        } else {
+          const siteUrl = sender.tab?.url || 'unknown';
+          session = startSession(siteUrl);
+        }
+      }
       return await recordExchange(intent, promptLength, wordCount);
     }
 
-    case 'REFLECTION_SAVED': {
-      const { recordReflection } = await import('../utils/sessionManager.js');
+    case 'REFLECTION_SAVED':
       return await recordReflection(message.text);
-    }
 
     case 'GET_CURRENT_SESSION':
       return getCurrentSession();
