@@ -7,12 +7,14 @@
  */
 
 // ── Intent Classifier (inline, no import needed) ───────────────
+// Priority order: more specific patterns first (summarizing before explaining)
+// to avoid "what is the bottom line" matching "what is" instead of "bottom line"
 
 const INTENT_PATTERNS = [
-  ['debugging', /(\berror\b|\bbug\b|\bfix\b|doesn't work|exception|\btraceback\b|\bissue\b|\bproblem\b|\bwrong\b|\bbroken\b|\bfail\b|typeerror|undefined|null is not|\bundefined\b)/i],
-  ['explaining', /(\bunderstand\b|\bwhat is\b|\bhow does\b|\bexplain\b|\bclarify\b|\bdefinition\b|\btell me about\b|\bdescribe\b|\bmeaning\b|\bconcept\b)/i],
-  ['brainstorming', /(\bidea\b|\bthink about\b|\bexplore\b|\bpossibilities\b|\boptions\b|\bapproach\b|\bdifferent ways\b|\bways to\b|\bcould we\b|\bwhat if\b|\bhow about\b)/i],
   ['summarizing', /(summarize|tl;?dr|recap|wrap up|key points|bottom line|summary|in short|overall)/i],
+  ['debugging', /(\berror\b|\bbug\b|\bfix\b|doesn't work|exception|\btraceback\b|\bissue\b|\bproblem\b|\bwrong\b|\bbroken\b|\bfail\b|typeerror|undefined|null is not|\bundefined\b)/i],
+  ['brainstorming', /(\bidea\b|\bthink about\b|\bexplore\b|\bpossibilities\b|\boptions\b|\bapproach\b|\bdifferent ways\b|\bways to\b|\bcould we\b|\bwhat if\b|\bhow about\b)/i],
+  ['explaining', /(\bunderstand\b|\bwhat is\b|\bhow does\b|\bexplain\b|\bclarify\b|\bdefinition\b|\btell me about\b|\bdescribe\b|\bmeaning\b|\bconcept\b)/i],
 ];
 
 function classifyIntent(promptText) {
