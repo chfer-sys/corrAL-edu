@@ -40,11 +40,36 @@
     .metric-value { color: #f1f5f9; font-weight: 500; }
     .divider { height: 1px; background: #334155; margin: 0.75rem 0; }
     .footer { font-size: 0.75rem; color: #94a3b8; text-align: center; }
-    .warning { color: #eab308; }
-    .settings-btn {
-      width: 100%;
+
+    /* Settings panel */
+    .settings-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.8125rem;
+    }
+    .settings-row label { color: #94a3b8; }
+    .settings-row input {
+      width: 60px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      color: #f1f5f9;
+      padding: 2px 6px;
+      text-align: center;
+      font-size: 0.8125rem;
+    }
+    .settings-row input:focus {
+      outline: none;
+      border-color: #6366f1;
+    }
+    .settings-hint { font-size: 0.6875rem; color: #64748b; margin-top: 4px; }
+
+    .btn-row { display: flex; gap: 6px; }
+    .btn {
+      flex: 1;
       padding: 0.5rem;
-      margin-top: 0.5rem;
       border: 1px solid #334155;
       border-radius: 6px;
       background: transparent;
@@ -52,7 +77,13 @@
       font-size: 0.75rem;
       cursor: pointer;
     }
-    .settings-btn:hover { border-color: #6366f1; color: #f1f5f9; }
+    .btn:hover { border-color: #6366f1; color: #f1f5f9; }
+    .btn.primary { background: #6366f1; border-color: #6366f1; color: #fff; }
+    .btn.primary:hover { background: #4f46e5; }
+    .btn.danger { color: #f87171; border-color: #7f1d1d; }
+    .btn.danger:hover { background: #7f1d1d; color: #f87171; }
+
+    .status-msg { font-size: 0.75rem; color: #22c55e; text-align: center; margin-top: 6px; min-height: 18px; }
   </style>
 </head>
 <body>
@@ -78,8 +109,22 @@
 
   <div class="divider"></div>
 
-  <button class="settings-btn" id="openDashboard">Open Teacher Dashboard</button>
-  <button class="settings-btn" id="clearData">Clear All Data</button>
+  <!-- Teacher config -->
+  <div class="settings-row">
+    <label>Reflect after</label>
+    <div style="display:flex;align-items:center;gap:4px;">
+      <input type="number" id="reflectAfterN" min="1" max="20" value="5">
+      <span style="color:#94a3b8;font-size:0.75rem;">exchanges</span>
+    </div>
+  </div>
+  <div class="settings-hint">Students see a reflection prompt after this many exchanges</div>
+
+  <div style="margin-top:0.75rem;display:flex;gap:6px;">
+    <button class="btn" id="openDashboard">Dashboard</button>
+    <button class="btn danger" id="clearData">Clear Data</button>
+  </div>
+
+  <div class="status-msg" id="statusMsg"></div>
 
   <div class="footer">corrAL-edu v1.0 — Local storage only</div>
 
